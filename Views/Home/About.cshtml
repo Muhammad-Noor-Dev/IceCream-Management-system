@@ -1,0 +1,602 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - About Us";
+}
+
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Hero Section -->
+    <section style="
+        height: 60vh;
+        background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+         background-image:url('/images/aboutt.jpg') ;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-size:cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 5%;">
+        <h1 style="
+            font-size: 3.5rem;
+            font-weight:bolder;
+            margin-bottom: 1rem;
+            color: #ff6b6b;">
+            Our Story
+        </h1>
+        <p style="
+            font-size: 1.2rem;
+             font-weight:600;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            line-height: 1.6;">
+            From a small family dream to Islamabad's favorite ice cream destination
+        </p>
+    </section>
+
+    <!-- Our Journey Section -->
+    <section style="
+        padding: 5rem 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+                color: #333;
+                text-align: center;">
+                The CreamyUtopia Journey
+            </h2>
+
+            <div style="
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;">
+
+                <!-- Timeline Item 1 -->
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    align-items: center;
+                    text-align: center;">
+                    <div style="
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        font-weight: bold;
+                        font-size: 1.5rem;">
+                        2010
+                    </div>
+                    <h3 style="font-size: 1.8rem; color: #ff6b6b;">The Beginning</h3>
+                    <p style="
+                        font-size: 1.1rem;
+                        line-height: 1.6;
+                        color: #555;
+                        max-width: 800px;">
+                        CreamyUtopia began as a small family-owned ice cream cart in the heart of Islamabad.
+                        With just five flavors and a passion for quality, our founder Amina Khan started serving
+                        homemade ice cream using recipes passed down through generations.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    align-items: center;
+                    text-align: center;">
+                    <div style="
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        font-weight: bold;
+                        font-size: 1.5rem;">
+                        2015
+                    </div>
+                    <h3 style="font-size: 1.8rem; color: #ff6b6b;">First Shop</h3>
+                    <p style="
+                        font-size: 1.1rem;
+                        line-height: 1.6;
+                        color: #555;
+                        max-width: 800px;">
+                        After gaining popularity and a loyal customer base, we opened our first permanent location
+                        in F-7 Markaz. This allowed us to expand our menu and introduce our signature gelatos and slushes
+                        that quickly became the talk of the town.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    align-items: center;
+                    text-align: center;">
+                    <div style="
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        font-weight: bold;
+                        font-size: 1.5rem;">
+                        2023
+                    </div>
+                    <h3 style="font-size: 1.8rem; color: #ff6b6b;">Today</h3>
+                    <p style="
+                        font-size: 1.1rem;
+                        line-height: 1.6;
+                        color: #555;
+                        max-width: 800px;">
+                        Today, CreamyUtopia has grown to three locations across Islamabad, serving thousands of happy
+                        customers each month. While we've grown, our commitment to quality, freshness, and that
+                        homemade taste remains unchanged. Every scoop still carries the same love and care as that
+                        first ice cream cart.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Makes Us Special -->
+    <section style="
+        padding: 5rem 5%;
+        background-color: #fff8f8;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+                color: #333;
+                text-align: center;">
+                What Makes Us Special
+            </h2>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;">
+
+                <!-- Feature 1 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        height: 200px;
+                         background-image:url('/images/premium1.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff6b6b;">Premium Ingredients</h3>
+                        <p style="color: #555; line-height: 1.6;">
+                            We source the finest ingredients, from fresh local dairy to imported Belgian chocolate and
+                            seasonal fruits. Quality is never compromised, ensuring each bite is pure delight.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        height: 200px;
+                         background-image:url('/images/craft.jpeg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff6b6b;">Artisanal Craftsmanship</h3>
+                        <p style="color: #555; line-height: 1.6;">
+                            Each batch of our ice cream is handcrafted with care. Our master ice cream makers have perfected
+                            the art of creating the perfect texture and flavor balance in every scoop.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        height: 200px;
+                         background-image:url('/images/flavours.jpg') ;
+                           background-position:center;
+                          background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff6b6b;">Innovative Flavors</h3>
+                        <p style="color: #555; line-height: 1.6;">
+                            While we honor traditional recipes, we love to innovate. Our seasonal specials and Pakistani-inspired
+                            flavors like Kulfi Pistachio and Mango Lassi have become customer favorites.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section style="
+        padding: 5rem 5%;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <h2 style="
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+                color: #333;">
+                Our Values
+            </h2>
+            <p style="
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #555;
+                margin-bottom: 3rem;">
+                At CreamyUtopia, we believe in more than just serving delicious ice cream.
+                We're committed to principles that guide everything we do.
+            </p>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;">
+
+                <!-- Value 1 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0 auto 1.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: white;">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Quality First</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        We never compromise on quality. From ingredients to service, excellence is our standard.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0 auto 1.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: white;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Community</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        We're proud to be part of Islamabad's community and actively participate in local events and causes.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        background-color: #ff6b6b;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0 auto 1.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: white;">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Innovation</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        We constantly explore new flavors and techniques while honoring traditional ice cream making.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Our Team -->
+    <section style="
+        padding: 5rem 5%;
+        background-color: #fff8f8;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+                color: #333;
+                text-align: center;">
+                Meet Our Team
+            </h2>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;">
+
+                <!-- Team Member 1 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    text-align: center;">
+                    <div style="
+                        height: 250px;
+                         background-image:url('/images/amna.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #ff6b6b;">Amina Khan</h3>
+                        <p style="color: #666; margin-bottom: 1rem; font-weight: 500;">Founder & Head Chef</p>
+                        <p style="color: #555; line-height: 1.6;">
+                            With a culinary background and passion for desserts, Amina created CreamyUtopia to share her
+                            family's ice cream traditions with Islamabad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    text-align: center;">
+                    <div style="
+                        height: 250px;
+                         background-image:url('/images/khalid.jpeg') ;
+                          background-position:center;
+                          background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #ff6b6b;">Hassan Ali</h3>
+                        <p style="color: #666; margin-bottom: 1rem; font-weight: 500;">Master Ice Cream Maker</p>
+                        <p style="color: #555; line-height: 1.6;">
+                            Trained in Italy, Hassan brings international expertise to our kitchen, creating our
+                            signature gelatos and innovative seasonal flavors.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                    text-align: center;">
+                    <div style="
+                        height: 250px;
+                        background-image:url('/images/fatima.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                        background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #ff6b6b;">Fatima Malik</h3>
+                        <p style="color: #666; margin-bottom: 1rem; font-weight: 500;">Operations Manager</p>
+                        <p style="color: #555; line-height: 1.6;">
+                            Fatima ensures that every visit to CreamyUtopia is perfect, from the warm welcome to
+                            the last delicious bite of your dessert.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Us -->
+    <section style="
+        padding: 5rem 5%;
+        text-align: center;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+                color: #333;">
+                Visit Us in Islamabad
+            </h2>
+            <p style="
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #555;
+                margin-bottom: 3rem;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;">
+                We have three convenient locations across Islamabad to satisfy your ice cream cravings.
+                Each shop offers our full menu in a welcoming, family-friendly environment.
+            </p>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;">
+
+                <!-- Location 1 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">F-7 Markaz</h3>
+                    <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                        Shop #5, Jinnah Super Market<br>
+                        F-7 Markaz, Islamabad
+                    </p>
+                    <p style="color: #555; line-height: 1.6;">
+                        <strong>Hours:</strong><br>
+                        Monday - Sunday: 12pm - 11pm
+                    </p>
+                </div>
+
+                <!-- Location 2 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Centaurus Mall</h3>
+                    <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                        Food Court, 4th Floor<br>
+                        The Centaurus Mall, Islamabad
+                    </p>
+                    <p style="color: #555; line-height: 1.6;">
+                        <strong>Hours:</strong><br>
+                        Monday - Sunday: 10am - 10pm
+                    </p>
+                </div>
+
+                <!-- Location 3 -->
+                <div style="
+                    padding: 2rem;
+                    border-radius: 15px;
+                    background-color: #fff8f8;
+                    transition: transform 0.3s ease;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Bahria Town Phase 4</h3>
+                    <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                        Shop #12, Commercial Area<br>
+                        Bahria Town Phase 4, Islamabad
+                    </p>
+                    <p style="color: #555; line-height: 1.6;">
+                        <strong>Hours:</strong><br>
+                        Monday - Sunday: 2pm - 12am
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section style="
+        padding: 4rem 5%;
+        text-align: center;
+        background-color: #fff8f8;">
+        <h2 style="
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;">
+            Ready to Experience CreamyUtopia?
+        </h2>
+        <p style="
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #555;
+            font-size: 1.1rem;">
+            Visit one of our locations today or order online for delivery. We can't wait to serve you!
+        </p>
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;">
+            @Html.ActionLink("View Our Menu", "Menu", "Home", null, new { style = "text-decoration: none; color: #fff; padding: 0.8rem 2rem; border-radius: 30px; background-color: #ff6b6b; font-weight: bold; font-size: 1.1rem;" })
+            @Html.ActionLink("Contact Us", "Contact", "Home", null, new { style = "text-decoration: none; color: #ff6b6b; padding: 0.8rem 2rem; border-radius: 30px; border: 2px solid #ff6b6b; font-weight: bold; font-size: 1.1rem;" })
+        </div>
+    </section>
+
+    <!-- Footer (Same as other pages for consistency) -->
+    <footer style="
+        background-color: #333;
+        color: #fff;
+        padding: 3rem 5%;">
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;">
+            <div style="max-width: 300px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6b6b;">CreamyUtopia</h3>
+                <p>Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Menu", "Menu", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("About", "About", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Contact", "Contact", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contact Us</h4>
+                <p>Shop #5, Jinnah Super Market</p>
+                <p>F-7 Markaz, Islamabad</p>
+                <p>Phone: (051) 456-7890</p>
+                <p>Email: info@creamyutopia.com</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Opening Hours</h4>
+                <p>Monday - Sunday: 12pm - 11pm (F-7)</p>
+                <p>Monday - Sunday: 10am - 10pm (Centaurus)</p>
+                <p>Monday - Sunday: 2pm - 12am (Bahria)</p>
+            </div>
+        </div>
+        <div style="
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;">
+            <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+

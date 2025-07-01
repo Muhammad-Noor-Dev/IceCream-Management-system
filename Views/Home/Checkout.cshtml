@@ -1,0 +1,314 @@
+﻿@model SemesterProject.Models.AddOrder
+@{
+    ViewBag.Title = "Checkout - CreamyUtopia";
+}
+
+<div style="font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; color: #333;">
+    @await Html.PartialAsync("_Navigation")
+
+    <section style="padding: 3rem 5% 1rem; text-align: center;">
+        <h1 style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1rem;">Checkout</h1>
+    </section>
+
+    <div style="padding: 0 5% 2rem; max-width: 1200px; margin: 0 auto;">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <!-- Order Summary -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1.5rem;">
+                <h3 style="border-bottom: 1px solid #eee; padding-bottom: 1rem;">Your Order</h3>
+                <ul style="list-style: none; padding: 0;">
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f5f5f5;">
+                            <span>@item.Menu.Name × @item.Quantity</span>
+                            <span>Rs. @(item.Menu.Price * item.Quantity)</span>
+                        </li>
+                    }
+                </ul>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                        <span>Total:</span>
+                        <span>Rs. @Model.TotalAmount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Form -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1.5rem;">
+                <h3 style="border-bottom: 1px solid #eee; padding-bottom: 1rem;">Shipping Details</h3>
+                <form asp-action="ConfirmOrder" method="post">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">Delivery Address</label>
+
+                        <!-- Search Box -->
+                        <div style="display: flex; margin-bottom: 1rem;">
+                            <input type="text" id="addressSearch" placeholder="Search for an address in English..."
+                                   style="flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px 0 0 4px;">
+                            <button type="button" id="searchButton"
+                                    style="padding: 0.8rem 1rem; background-color: #ff6b6b; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer;">
+                                Search
+                            </button>
+                        </div>
+
+                        <!-- Search status -->
+                        <div id="searchStatus" style="margin-bottom: 0.5rem; color: #666; font-size: 0.9rem;"></div>
+
+                        <!-- Map Container -->
+                        <div id="map" style="height: 300px; width: 100%; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px;"></div>
+
+                        <!-- Selected Address Display -->
+                        <div id="selectedAddressDisplay" style="padding: 0.8rem; background-color: #f9f9f9; border-radius: 4px; margin-bottom: 1rem; min-height: 2.5rem;"></div>
+
+                        <!-- Hidden field that binds to your model -->
+                        <textarea asp-for="Address" id="selectedAddress" style="display: none;" required></textarea>
+
+                        <span asp-validation-for="Address" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Rest of your existing form remains unchanged -->
+                    <input type="hidden" asp-for="TotalAmount" />
+                    @for (int i = 0; i < Model.CartItems.Count; i++)
+                    {
+                        <input type="hidden" asp-for="@Model.CartItems[i].CartId" />
+                        <input type="hidden" asp-for="@Model.CartItems[i].MenuId" />
+                        <input type="hidden" asp-for="@Model.CartItems[i].Quantity" />
+                    }
+
+                    <button type="submit" id="confirmOrderBtn" style="background-color: #ff6b6b; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 30px; font-weight: bold; width: 100%; cursor: pointer;">
+                        Confirm Order
+                    </button>
+                </form>
+            </div>
+
+            <!-- Add Leaflet CSS and JS -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // DOM elements
+                    const mapElement = document.getElementById('map');
+                    const searchInput = document.getElementById('addressSearch');
+                    const searchButton = document.getElementById('searchButton');
+                    const searchStatus = document.getElementById('searchStatus');
+                    const selectedAddressDisplay = document.getElementById('selectedAddressDisplay');
+                    const selectedAddressField = document.getElementById('selectedAddress');
+                    const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+
+                    // Track last API call time to respect rate limits
+                    let lastApiCall = 0;
+                    const minTimeBetweenCalls = 1000; // 1 second minimum between API calls
+
+                    // Initialize the map (default to Karachi)
+                    const map = L.map('map').setView([24.8607, 67.0011], 13);
+
+                    // Add OpenStreetMap tiles (English labels)
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                        maxZoom: 19
+                    }).addTo(map);
+
+                    // Add draggable marker
+                    const marker = L.marker(map.getCenter(), {
+                        draggable: true
+                    }).addTo(map);
+
+                    // Set initial address value to empty
+                    selectedAddressField.value = '';
+
+                    // Function to format address nicely
+                    function formatAddress(addressData) {
+                        // Check if we have address components
+                        if (!addressData || !addressData.address) {
+                            return null;
+                        }
+
+                        const addr = addressData.address;
+                        const parts = [];
+
+                        // Building details
+                        if (addr.house_number) parts.push(addr.house_number);
+                        if (addr.building) parts.push(addr.building);
+
+                        // Street info
+                        if (addr.road) parts.push(addr.road);
+                        if (addr.neighbourhood) parts.push(addr.neighbourhood);
+
+                        // Area info
+                        if (addr.suburb) parts.push(addr.suburb);
+                        if (addr.city_district) parts.push(addr.city_district);
+                        if (addr.city) parts.push(addr.city);
+
+                        // Region info
+                        if (addr.state) parts.push(addr.state);
+                        if (addr.postcode) parts.push(addr.postcode);
+                        if (addr.country) parts.push(addr.country);
+
+                        if (parts.length === 0) {
+                            // Fallback to display name if we couldn't parse components
+                            return addressData.display_name;
+                        }
+
+                        return parts.join(', ');
+                    }
+
+                    // Function to safely call Nominatim API with rate limiting
+                    async function callNominatimApi(url) {
+                        const now = Date.now();
+                        const timeToWait = Math.max(0, lastApiCall + minTimeBetweenCalls - now);
+
+                        if (timeToWait > 0) {
+                            await new Promise(resolve => setTimeout(resolve, timeToWait));
+                        }
+
+                        lastApiCall = Date.now();
+
+                        try {
+                            const response = await fetch(url);
+                            if (!response.ok) {
+                                throw new Error(`API error: ${response.status}`);
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error calling Nominatim API:', error);
+                            throw error;
+                        }
+                    }
+
+                    // Function to get address from coordinates
+                    async function getAddressFromCoordinates(lat, lng) {
+                        try {
+                            searchStatus.textContent = 'Finding address...';
+                            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=en&addressdetails=1`;
+                            const data = await callNominatimApi(url);
+                            searchStatus.textContent = '';
+                            return data;
+                        } catch (error) {
+                            searchStatus.textContent = 'Could not retrieve address. Try again later.';
+                            return {
+                                display_name: `Location (${lat.toFixed(6)}, ${lng.toFixed(6)})`,
+                                address: null
+                            };
+                        }
+                    }
+
+                    // Function to search for locations
+                    async function searchLocation(query) {
+                        try {
+                            searchStatus.textContent = 'Searching...';
+                            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&accept-language=en&addressdetails=1&limit=1`;
+                            const data = await callNominatimApi(url);
+                            searchStatus.textContent = '';
+
+                            if (data && data.length > 0) {
+                                return {
+                                    lat: parseFloat(data[0].lat),
+                                    lng: parseFloat(data[0].lon),
+                                    addressData: data[0]
+                                };
+                            }
+
+                            searchStatus.textContent = 'No results found. Try a different search term.';
+                            return null;
+                        } catch (error) {
+                            searchStatus.textContent = 'Search service unavailable. Try again later.';
+                            return null;
+                        }
+                    }
+
+                    // Update address display and hidden field - MODIFIED to store only the string address
+                    function updateAddressDisplay(addressText, fullAddressData = null) {
+                        if (!addressText) {
+                            selectedAddressDisplay.textContent = 'No address selected. Please select a location on the map.';
+                            selectedAddressField.value = '';
+                            confirmOrderBtn.disabled = true;
+                            return;
+                        }
+
+                        selectedAddressDisplay.textContent = addressText;
+
+                        // Store just the formatted address string (not a JSON object)
+                        selectedAddressField.value = addressText;
+
+                        // Enable the confirm button
+                        confirmOrderBtn.disabled = false;
+                    }
+
+                    // Handle marker movement
+                    marker.on('dragend', async function () {
+                        const position = marker.getLatLng();
+                        const addressData = await getAddressFromCoordinates(position.lat, position.lng);
+                        const formattedAddress = formatAddress(addressData) || addressData.display_name;
+                        updateAddressDisplay(formattedAddress, addressData);
+                    });
+
+                    // Handle map clicks
+                    map.on('click', async function (e) {
+                        marker.setLatLng(e.latlng);
+                        const addressData = await getAddressFromCoordinates(e.latlng.lat, e.latlng.lng);
+                        const formattedAddress = formatAddress(addressData) || addressData.display_name;
+                        updateAddressDisplay(formattedAddress, addressData);
+                    });
+
+                    // Handle search button click
+                    searchButton.addEventListener('click', async function () {
+                        const query = searchInput.value.trim();
+                        if (query) {
+                            const result = await searchLocation(query);
+                            if (result) {
+                                map.setView([result.lat, result.lng], 16);
+                                marker.setLatLng([result.lat, result.lng]);
+                                const formattedAddress = formatAddress(result.addressData) || result.addressData.display_name;
+                                updateAddressDisplay(formattedAddress, result.addressData);
+                            }
+                        }
+                    });
+
+                    // Handle Enter key in search box
+                    searchInput.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            searchButton.click();
+                        }
+                    });
+
+                    // Try to get user's location
+                    function getUserLocation() {
+                        searchStatus.textContent = 'Locating you...';
+
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                                async (position) => {
+                                    const { latitude, longitude } = position.coords;
+                                    map.setView([latitude, longitude], 16);
+                                    marker.setLatLng([latitude, longitude]);
+
+                                    const addressData = await getAddressFromCoordinates(latitude, longitude);
+                                    const formattedAddress = formatAddress(addressData) || addressData.display_name;
+                                    updateAddressDisplay(formattedAddress, addressData);
+
+                                    searchStatus.textContent = '';
+                                },
+                                (error) => {
+                                    console.error('Geolocation error:', error);
+                                    searchStatus.textContent = '';
+                                    // Initialize with default position address
+                                    marker.fire('dragend');
+                                }
+                            );
+                        } else {
+                            searchStatus.textContent = '';
+                            // Initialize with default position address
+                            marker.fire('dragend');
+                        }
+                    }
+
+                    // Initialize the map with user's location or default
+                    getUserLocation();
+
+                    // Disable submit button until address is selected
+                    confirmOrderBtn.disabled = true;
+                });
+            </script>
+        </div>
+    </div>
+</div>

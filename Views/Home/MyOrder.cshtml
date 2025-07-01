@@ -1,0 +1,388 @@
+﻿@model List<SemesterProject.Models.Entities.Order>
+@{
+    ViewBag.Title = "CreamyUtopia - My Orders";
+}
+
+<div style="
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;">
+
+    @await Html.PartialAsync("_Navigation")
+    <!-- My Orders Section -->
+    <section style="
+      padding: 3rem 5% 1rem;
+      text-align: center;">
+        <h1 style="
+          font-size: 3rem;
+          color: #ff6b6b;
+          margin-bottom: 1rem;">
+            My Orders
+        </h1>
+        <p style="
+          max-width: 800px;
+          margin: 0 auto 2rem;
+          color: #555;
+          font-size: 1.1rem;">
+            Track your orders and view your order history.
+        </p>
+    </section>
+
+    @if (Model == null || !Model.Any())
+    {
+        <!-- No Orders Message -->
+        <div id="noOrdersMessage" style="
+          padding: 3rem 5%;
+          min-height: 50vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;">
+
+            <div style="
+              max-width: 800px;
+              width: 100%;
+              text-align: center;">
+
+                <img src="/Content/Images/empty-order.png" alt="No Orders" style="
+                  width: 200px;
+                  height: 200px;
+                  margin-bottom: 2rem;
+                  opacity: 0.7;"
+                     onerror="this.src='/Content/Images/placeholder.jpg'; this.onerror=null;">
+
+                <h2 style="
+                  font-size: 2.5rem;
+                  color: #333;
+                  margin-bottom: 1rem;">
+                    No Orders Yet
+                </h2>
+
+                <p style="
+                  color: #666;
+                  font-size: 1.1rem;
+                  margin-bottom: 2rem;
+                  line-height: 1.6;">
+                    You haven't placed any orders yet. Browse our delicious menu and place your first order today!
+                </p>
+
+                <a href="@Url.Action("Menu", "Home")" style="
+                  display: inline-block;
+                  background-color: #ff6b6b;
+                  color: white;
+                  text-decoration: none;
+                  padding: 0.8rem 2rem;
+                  border-radius: 30px;
+                  font-weight: bold;
+                  font-size: 1.1rem;
+                  transition: background-color 0.3s ease;">
+                    Explore Menu
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Active Orders Section -->
+        <div id="activeOrdersSection" style="
+          padding: 0 5% 3rem;">
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                @foreach (var order in Model)
+                {
+                    <!-- Order Card -->
+                    <div style="
+                      background-color: white;
+                      border-radius: 15px;
+                      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                      overflow: hidden;
+                      margin-bottom: 2rem;">
+
+                        <!-- Order Header -->
+                        <div style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          padding: 1.5rem;
+                          background-color: #fff8f8;
+                          border-bottom: 1px solid #eee;">
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.3rem;">Order #@order.OrderId</h3>
+                                <p style="margin: 0.5rem 0 0; color: #666;">Placed on @order.OrderDate.ToString("MMMM d, yyyy 'at' h:mm tt")</p>
+                            </div>
+                            <div style="
+                              @(order.Status == "Delivered" ? "background-color: #e6ffee; color: #00a854;" :
+                                order.Status == "Cancelled" ? "background-color: #ffe6e6; color: #f5222d;" :
+                                "background-color: #e6f7ff; color: #0070f3;")
+                              padding: 0.3rem 1rem;
+                              border-radius: 20px;
+                              font-weight: 500;">
+                                @order.Status
+                            </div>
+                        </div>
+
+                        <!-- Order Details -->
+                        <div style="padding: 1.5rem;">
+                            <!-- Order Items -->
+                            <div style="margin-bottom: 1rem;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="border-bottom: 1px solid #eee;">
+                                            <th style="text-align: left; padding: 0.5rem 0;">Item</th>
+                                            <th style="text-align: right; padding: 0.5rem 0;">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.OrderItems[order.OrderId])
+                                        {
+                                            <tr style="border-bottom: 1px solid #eee;">
+                                                <td style="padding: 0.5rem 0;">
+                                                    <div style="font-weight: 500;">@item.Menu.Name</div>
+                                                    @if (!string.IsNullOrEmpty(item.Menu.Description))
+                                                    {
+                                                        <div style="font-size: 0.8rem; color: #666;">@item.Menu.Description</div>
+                                                    }
+                                                </td>
+                                                <td style="text-align: right; padding: 0.5rem 0;">
+                                                    Rs. @item.Menu.Price
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Order Total -->
+                            <div style="
+                              display: flex;
+                              justify-content: space-between;
+                              font-weight: bold;
+                              margin-top: 1rem;
+                              padding-top: 1rem;
+                              border-top: 1px solid #eee;">
+                                <span>Total:</span>
+                                <span>Rs. @order.Amount</span>
+                            </div>
+                            <br />
+                            <div>
+                                <h4 style="margin: 0 0 1rem; font-size: 1.1rem;">Delivery Address</h4>
+                                <p style="margin: 0; color: #666;">
+                                    @order.Address
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Order Tracking -->
+                        @if (order.Status != "Delivered" && order.Status != "Cancelled")
+                        {
+                            <div style="padding: 1.5rem; background-color: #f9f9f9; border-top: 1px solid #eee;">
+                                <h4 style="margin: 0 0 1rem; font-size: 1.1rem;">Order Status</h4>
+
+                                <!-- Progress Bar -->
+                                <div style="
+                                  display: flex;
+                                  justify-content: space-between;
+                                  position: relative;
+                                  margin-bottom: 2rem;
+                                  padding: 0 10px;">
+
+                                    <!-- Progress Line -->
+                                    <div style="
+                                      position: absolute;
+                                      top: 15px;
+                                      left: 25px;
+                                      right: 25px;
+                                      height: 3px;
+                                      background-color: #ddd;
+                                      z-index: 1;"></div>
+
+                                    <!-- Completed Progress -->
+                                    <div style="
+                                      position: absolute;
+                                      top: 15px;
+                                      left: 25px;
+                                      width: @(order.Status == "Pending" ? "25%" :
+                                             order.Status == "Preparing" ? "50%" :
+                                             order.Status == "On the Way" ? "75%" : "100%");
+                                      height: 3px;
+                                      background-color: #ff6b6b;
+                                      z-index: 2;"></div>
+
+                                    <!-- Step 1: Order Placed -->
+                                    <div style="
+                                      display: flex;
+                                      flex-direction: column;
+                                      align-items: center;
+                                      position: relative;
+                                      z-index: 3;">
+                                        <div style="
+                                          width: 30px;
+                                          height: 30px;
+                                          border-radius: 50%;
+                                          background-color: #ff6b6b;
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          color: white;
+                                          margin-bottom: 0.5rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </div>
+                                        <span style="font-size: 0.8rem; color: #333; font-weight: 500;">Order Placed</span>
+                                    </div>
+
+                                    <!-- Step 2: Preparing -->
+                                    <div style="
+                                      display: flex;
+                                      flex-direction: column;
+                                      align-items: center;
+                                      position: relative;
+                                      z-index: 3;">
+                                        <div style="
+                                          width: 30px;
+                                          height: 30px;
+                                          border-radius: 50%;
+                                          background-color: @(order.Status == "Preparing" || order.Status == "On the Way" || order.Status == "Delivered" ? "#ff6b6b" : "#ddd");
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          color: white;
+                                          margin-bottom: 0.5rem;">
+                                            @if (order.Status == "Preparing" || order.Status == "On the Way" || order.Status == "Delivered")
+                                            {
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: #999;">2</span>
+                                            }
+                                        </div>
+                                        <span style="font-size: 0.8rem; @(order.Status == "Preparing" || order.Status == "On the Way" || order.Status == "Delivered" ? "color: #333; font-weight: 500;" : "color: #999;")">Preparing</span>
+                                    </div>
+
+                                    <!-- Step 3: On the Way -->
+                                    <div style="
+                                      display: flex;
+                                      flex-direction: column;
+                                      align-items: center;
+                                      position: relative;
+                                      z-index: 3;">
+                                        <div style="
+                                          width: 30px;
+                                          height: 30px;
+                                          border-radius: 50%;
+                                          background-color: @(order.Status == "On the Way" || order.Status == "Delivered" ? "#ff6b6b" : "#ddd");
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          color: white;
+                                          margin-bottom: 0.5rem;">
+                                            @if (order.Status == "On the Way" || order.Status == "Delivered")
+                                            {
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: #999;">3</span>
+                                            }
+                                        </div>
+                                        <span style="font-size: 0.8rem; @(order.Status == "On the Way" || order.Status == "Delivered" ? "color: #333; font-weight: 500;" : "color: #999;")">On the Way</span>
+                                    </div>
+
+                                    <!-- Step 4: Delivered -->
+                                    <div style="
+                                      display: flex;
+                                      flex-direction: column;
+                                      align-items: center;
+                                      position: relative;
+                                      z-index: 3;">
+                                        <div style="
+                                          width: 30px;
+                                          height: 30px;
+                                          border-radius: 50%;
+                                          background-color: @(order.Status == "Delivered" ? "#ff6b6b" : "#ddd");
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          color: white;
+                                          margin-bottom: 0.5rem;">
+                                            @if (order.Status == "Delivered")
+                                            {
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: #999;">4</span>
+                                            }
+                                        </div>
+                                        <span style="font-size: 0.8rem; @(order.Status == "Delivered" ? "color: #333; font-weight: 500;" : "color: #999;")">Delivered</span>
+                                    </div>
+                                </div>
+
+                                <!-- Delivery Address -->
+                                
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- Footer -->
+    <footer style="
+      background-color: #333;
+      color: #fff;
+      padding: 3rem 5%;">
+        <div style="
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 2rem;">
+            <div style="max-width: 300px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6b6b;">CreamyUtopia</h3>
+                <p>Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Menu", "Menu", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("About", "About", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Contact", "Contact", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("My Orders", "MyOrder", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                   
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contact Us</h4>
+                <p>Shop #5, Jinnah Super Market</p>
+                <p>F-7 Markaz, Islamabad</p>
+                <p>Phone: (051) 456-7890</p>
+                <p>Email: info@creamyutopia.com</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Opening Hours</h4>
+                <p>Monday - Sunday: 12pm - 11pm (F-7)</p>
+                <p>Monday - Sunday: 10am - 10pm (Centaurus)</p>
+                <p>Monday - Sunday: 2pm - 12am (Bahria)</p>
+            </div>
+        </div>
+        <div style="
+          margin-top: 2rem;
+          text-align: center;
+          padding-top: 2rem;
+          border-top: 1px solid #555;">
+            <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,64 @@
+﻿@model SemesterProject.Models.Entities.Menu
+
+<h1>Edit Products</h1>
+<form method="post" class="w-75 mx-auto">
+    <input type="hidden" asp-for="Mid" /> <!-- Ensures Mid is submitted -->
+    <div class="mb-3">
+        <label for="Mid" class="form-label">ID:</label>
+        <input type="hidden" class="form-control" id="Mid" asp-for="Mid" readonly />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Product Name:</label>
+        <input type="text" class="form-control" id="Name" asp-for="Name" />
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description:</label>
+        <input type="text" class="form-control" id="Description" asp-for="Description" />
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+        <label asp-for="CategoryName" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+        <select asp-for="CategoryName" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        background-color: white;">
+            <option value="">Select Category</option>
+            <option value="Gelatos">Gelatos</option>
+            <option value="Softie Ice Cream">Softie Ice Cream</option>
+            <option value="Slush">Slush</option>
+        </select>
+        <span asp-validation-for="CategoryName" style="color: #f44336; font-size: 0.8rem;"></span>
+    </div>
+    <div class="mb-3">
+        <label for="Price" class="form-label">Price (Rs.):</label>
+        <input type="number" class="form-control" id="Price" asp-for="Price" />
+    </div>
+    
+    <div style="margin-bottom: 2rem;">
+        <label asp-for="Status" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+        <select asp-for="Status" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        background-color: white;">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+        <span asp-validation-for="Status" style="color: #f44336; font-size: 0.8rem;"></span>
+    </div>
+    <div class="mb-3">
+        <input type="submit" class="btn btn-primary d-block mx-auto" value="Save" />
+    </div>
+</form>

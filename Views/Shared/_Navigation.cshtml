@@ -1,0 +1,66 @@
+﻿@{
+    bool isLoggedIn = Context.Session.GetInt32("userid") != null;
+    bool isAdmin = Context.Session.GetString("isadmin") == "true";
+}
+
+<nav style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;">
+
+    <div style="font-weight: bold; font-size: 1.8rem; color: #ff6b6b;">
+        CreamyUtopia
+    </div>
+
+    <div style="display: flex; gap: 2rem;">
+        @Html.ActionLink("Home", "Index", "Home", null, new { style = "text-decoration: none; color: #333;" })
+        @Html.ActionLink("Menu", "Menu", "Home", null, new { style = "text-decoration: none; color: #333;" })
+        @Html.ActionLink("About", "About", "Home", null, new { style = "text-decoration: none; color: #333;" })
+        @Html.ActionLink("Contact", "Contact", "Home", null, new { style = "text-decoration: none; color: #333;" })
+        @if (isLoggedIn)
+        {
+            @Html.ActionLink("My Orders", "MyOrder", "Home", null, new { style = "text-decoration: none; color: #ff6b6b; font-weight: bold;" })
+        }
+    </div>
+
+    <div style="display: flex; gap: 1rem; align-items: center;">
+        @if (isLoggedIn)
+        {
+            <a href="@Url.Action("Cart", "Home")" style="text-decoration: none; color: #333; position: relative;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.49-.402L1.61 2H.5a.5.5 0 0 1-.5-.5zm3.14 4l1.25 5.5H13l1.2-5.5H3.14zM5 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+                <span id="cart-count" style="
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #ff6b6b;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        ">@(ViewBag.CartCount ?? 0)</span>
+            </a>
+            @Html.ActionLink("Logout", "Logout", "Account", null, new
+                {
+                    style = "text-decoration: none; color: #333; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ff6b6b;",
+                    onclick = "return confirm('Are you sure you want to logout?');"
+                })
+        }
+        else
+        {
+            @Html.ActionLink("Login", "Login", "Account", null, new { style = "text-decoration: none; color: #333; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ff6b6b;" })
+            @Html.ActionLink("Sign Up", "Register", "Account", null, new { style = "text-decoration: none; color: #fff; padding: 0.5rem 1rem; border-radius: 20px; background-color: #ff6b6b;" })
+        }
+    </div>
+</nav>

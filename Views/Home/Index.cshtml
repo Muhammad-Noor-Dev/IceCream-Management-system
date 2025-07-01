@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Home";
+}
+
+<div style="
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Hero Section -->
+    <section style="
+      height: 80vh;
+      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+      background-image:url('/images/ice.jpg') ;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;">
+        <h1 style="
+          font-size: 3.5rem;
+          font-weight:bolder;
+          margin-bottom: 1rem;
+          color: #ff6b6b;">
+            Welcome to CreamyUtopia
+        </h1>
+        <p style="
+          font-size: 1.2rem;
+          font-weight:600;
+          margin-bottom: 2rem;
+          max-width: 600px;">Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+        <div style="
+          display: flex;
+          gap: 1rem;">
+            @Html.ActionLink("Explore Menu", "Menu", "Home", null, new { style = "text-decoration: none; color: #fff; padding: 0.8rem 2rem; border-radius: 30px; background-color: #ff6b6b; font-weight: bold; font-size: 1.1rem;" })
+             </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section style="
+      padding: 5rem 5%;
+      background-color: #fff8f8;">
+        <h2 style="
+          text-align: center;
+          font-size: 2.5rem;
+          margin-bottom: 3rem;
+          color: #333;">
+            Our Signature Flavors
+        </h2>
+        <div style="
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          flex-wrap: wrap;">
+            <!-- Product Card 1 -->
+            <div style="
+              width: 300px;
+              border-radius: 15px;
+              overflow: hidden;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              background-color: #fff;
+              transition: transform 0.3s ease;
+              cursor: pointer;">
+                <div style="
+                  height: 200px;
+                   background-image:url('/images/Strawberry-Delight.jpg') ;
+                   background-position:center;
+
+                   background-size:cover;"></div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">strawberry</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Fresh strawberries blended with our creamy vanilla base.</p>
+                    <div style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;">
+                        <span style="font-weight: bold; font-size: 1.2rem;">Rs.210</span>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div style="
+              width: 300px;
+              border-radius: 15px;
+              overflow: hidden;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              background-color: #fff;
+              transition: transform 0.3s ease;
+              cursor: pointer;">
+                <div style="
+                  height: 200px;
+                    background-image:url('/images/chocolate-fudge-cakes-2.jpg') ;
+                    background-position:center;
+                    background-size:cover;"></div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Chocolate Fudge</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Rich chocolate ice cream with fudge swirls and chunks.</p>
+                    <div style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;">
+                        <span style="font-weight: bold; font-size: 1.2rem;">Rs.350</span>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div style="
+              width: 300px;
+              border-radius: 15px;
+              overflow: hidden;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              background-color: #fff;
+              transition: transform 0.3s ease;
+              cursor: pointer;">
+                <div style="
+                  height: 200px;
+                  background-image:url('/images/Mint2.png') ;
+                    background-position:center;
+                    background-size:cover;"></div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Mint Chip</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Refreshing mint ice cream with chocolate chips.</p>
+                    <div style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;">
+                        <span style="font-weight: bold; font-size: 1.2rem;">Rs.250</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="
+      background-color: #333;
+      color: #fff;
+      padding: 3rem 5%;">
+        <div style="
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 2rem;">
+            <div style="max-width: 300px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6b6b;">CreamyUtopia</h3>
+                <p>Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Menu", "Menu", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("About", "About", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Contact", "Contact", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("My Orders", "MyOrder", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                   
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contact Us</h4>
+                <p>123 Ice Cream Lane</p>
+                <p>Dessert City, DC 12345</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Email: info@creamyutopia.com</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Opening Hours</h4>
+                <p>Monday - Friday: 10am - 10pm</p>
+                <p>Saturday - Sunday: 11am - 11pm</p>
+            </div>
+        </div>
+        <div style="
+          margin-top: 2rem;
+          text-align: center;
+          padding-top: 2rem;
+          border-top: 1px solid #555;">
+            <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" style="
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;">
+        <div style="
+          background-color: white;
+          padding: 2rem;
+          border-radius: 10px;
+          max-width: 500px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;">
+            <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1.5rem;">
+                <h3 style="margin: 0; font-size: 1.5rem;">Your Cart</h3>
+                <button id="closeCartBtn" style="
+                  background: none;
+                  border: none;
+                  font-size: 1.5rem;
+                  cursor: pointer;
+                  color: #666;">
+                    &times;
+                </button>
+            </div>
+            <div id="cartItems" style="margin-bottom: 1.5rem;">
+                <!-- Cart items will be added here dynamically -->
+                <p id="emptyCartMessage">Your cart is empty.</p>
+            </div>
+            <div id="cartTotal" style="
+              display: flex;
+              justify-content: space-between;
+              font-weight: bold;
+              margin-bottom: 1.5rem;
+              padding-top: 1rem;
+              border-top: 1px solid #eee;">
+                <span>Total:</span>
+                <span>Rs. 0</span>
+            </div>
+            <button id="checkoutBtn" style="
+              width: 100%;
+              background-color: #ff6b6b;
+              color: white;
+              border: none;
+              padding: 0.8rem;
+              border-radius: 8px;
+              font-size: 1rem;
+              font-weight: 500;
+              cursor: pointer;">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+</div>

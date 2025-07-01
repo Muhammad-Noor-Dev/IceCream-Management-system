@@ -1,0 +1,460 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Order Management";
+}
+@model List<SemesterProject.Models.Entities.Order>
+@Html.AntiForgeryToken()
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    min-height: 100vh;
+    display: flex;">
+
+    <!-- Admin Sidebar -->
+    <div style="
+        width: 250px;
+        background-color: #333;
+        color: white;
+        padding: 2rem 0;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;">
+
+        <!-- Admin Logo -->
+        <div style="
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;">
+            CreamyUtopia<br>
+            <span style="font-size: 1rem; color: #ddd;">Admin Panel</span>
+        </div>
+
+        <!-- Admin Navigation -->
+        <ul style="
+            list-style: none;
+            padding: 0;
+            margin: 0;">
+
+            <li style="margin-bottom: 0.5rem;">
+                <a href="@Url.Action("Inventory", "Admin")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ddd;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Inventory Management
+                </a>
+            </li>
+
+            <li style="margin-bottom: 0.5rem;">
+                <a href="@Url.Action("Orders", "Admin")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ddd;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    Order Management
+                </a>
+            </li>
+
+           
+            <li style="margin-top: 2rem;">
+                <a href="@Url.Action("Index", "Home")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ff6b6b;
+                    text-decoration: none;
+                    transition: color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Back to Website
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div style="
+        flex: 1;
+        margin-left: 250px;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        min-height: 100vh;">
+
+        <!-- Page Header -->
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;">
+            <h1 style="
+                font-size: 2rem;
+                color: #333;
+                margin: 0;">
+                Order Management
+            </h1>
+        </div>
+
+        <!-- Success/Error Messages -->
+        @if (TempData["Success"] != null)
+        {
+            <div style="
+                background-color: #e6ffee;
+                color: #00a854;
+                padding: 1rem;
+                border-radius: 5px;
+                margin-bottom: 1rem;">
+                @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div style="
+                background-color: #ffe6e6;
+                color: #f5222d;
+                padding: 1rem;
+                border-radius: 5px;
+                margin-bottom: 1rem;">
+                @TempData["Error"]
+            </div>
+        }
+
+        <!-- Order Filters -->
+        <div style="
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;">
+
+            <div style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                align-items: center;">
+
+                <!-- Search -->
+                <div style="flex: 1; min-width: 200px;">
+                    <input type="text" id="searchOrders" placeholder="Search by order ID or customer..." style="
+                        width: 100%;
+                        padding: 0.7rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 0.9rem;">
+                </div>
+
+                <!-- Status Filter -->
+                <div style="min-width: 150px;">
+                    <select id="statusFilter" style="
+                        width: 100%;
+                        padding: 0.7rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+                        background-color: white;">
+                        <option value="">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Preparing">Preparing</option>
+                        <option value="On the Way">On the Way</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <!-- Date Filter -->
+                <div style="min-width: 150px;">
+                    <select id="dateFilter" style="
+                        width: 100%;
+                        padding: 0.7rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+                        background-color: white;">
+                        <option value="">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                    </select>
+                </div>
+
+                <!-- Filter Button -->
+                <button id="applyFilters" style="
+                    padding: 0.7rem 1.5rem;
+                    background-color: #333;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    cursor: pointer;">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Orders Table -->
+        <!-- Order Details -->
+        <div style="max-width: 1000px; margin: 0 auto;">
+            @foreach (var order in Model)
+            {
+                <!-- Order Card -->
+                <div class="order-card" style="
+                      background-color: white;
+                      border-radius: 15px;
+                      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                      overflow: hidden;
+                      margin-bottom: 2rem;">
+
+                    <!-- Order Header -->
+                    <div style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          padding: 1.5rem;
+                          background-color: #fff8f8;
+                          border-bottom: 1px solid #eee;">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.3rem;">Order #@order.OrderId</h3>
+                            <p style="margin: 0.5rem 0 0; color: #666;">Placed on @order.OrderDate.ToString("MMMM d, yyyy 'at' h:mm tt")</p>
+                        </div>
+                        <div class="status-display" style="
+                              @(order.Status == "Delivered" ? "background-color: #e6ffee; color: #00a854;" :
+                                order.Status == "Cancelled" ? "background-color: #ffe6e6; color: #f5222d;" :
+                                "background-color: #e6f7ff; color: #0070f3;")
+                              padding: 0.3rem 1rem;
+                              border-radius: 20px;
+                              font-weight: 500;">
+                            @order.Status
+                        </div>
+                    </div>
+
+                    <!-- Order Details -->
+                    <div style="padding: 1.5rem;">
+                        <!-- Order Items -->
+                        <div style="margin-bottom: 1rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <th style="text-align: left; padding: 0.5rem 0;">Item</th>
+                                        <th style="text-align: right; padding: 0.5rem 0;">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.OrderItems[order.OrderId])
+                                    {
+                                        <tr style="border-bottom: 1px solid #eee;">
+                                            <td style="padding: 0.5rem 0;">
+                                                <div style="font-weight: 500;">@item.Menu.Name</div>
+                                                @if (!string.IsNullOrEmpty(item.Menu.Description))
+                                                {
+                                                    <div style="font-size: 0.8rem; color: #666;">@item.Menu.Description</div>
+                                                }
+                                            </td>
+                                            <td style="text-align: right; padding: 0.5rem 0;">
+                                                Rs. @item.Menu.Price
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Order Total -->
+                        <div style="
+                              display: flex;
+                              justify-content: space-between;
+                              font-weight: bold;
+                              margin-top: 1rem;
+                              padding-top: 1rem;
+                              border-top: 1px solid #eee;">
+                            <span>Total:</span>
+                            <span>Rs. @order.Amount</span>
+                        </div>
+
+                        <!-- Status Update Section -->
+                        <div style="
+                              margin-top: 1rem;
+                              padding-top: 1rem;
+                              border-top: 1px solid #eee;">
+                            <h4 style="margin: 0 0 1rem; font-size: 1.1rem;">Update Status</h4>
+                            <form asp-action="UpdateOrderStatus" asp-controller="Admin" method="post" style="display: flex; gap: 1rem;">
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <select name="status"   style=" 
+                                    flex: 1;
+                                    padding: 0.7rem;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                    font-size: 0.9rem;
+                                    background-color: white;">
+                                    <option value="Pending" >Pending</option>
+                                    <option value="Preparing" >Preparing</option>
+                                    <option value="On the Way" >On the Way</option>
+                                    <option value="Delivered">Delivered</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                                <button type="submit" style="
+                                    padding: 0.7rem 1.5rem;
+                                    background-color: #ff6b6b;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 5px;
+                                    font-size: 0.9rem;
+                                    cursor: pointer;">
+                                    Update Status
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <div style="padding: 0 1.5rem 1.5rem;">
+                        <h4 style="margin: 0 0 1rem; font-size: 1.1rem;">Delivery Address</h4>
+                        <p style="margin: 0; color: #666;">
+                            @order.Address
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Order Details Modal -->
+<div id="orderModal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;">
+
+    <div style="
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        width: 90%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;">
+
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;">
+            <h2 id="modalTitle" style="
+                margin: 0;
+                font-size: 1.5rem;
+                color: #333;">
+                Order Details
+            </h2>
+            <button id="closeModal" style="
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: #666;">
+                &times;
+            </button>
+        </div>
+
+        <div id="orderDetails">
+            <!-- Order details will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Filter functionality
+        const applyFiltersButton = document.getElementById('applyFilters');
+        const searchInput = document.getElementById('searchOrders');
+        const statusFilter = document.getElementById('statusFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const orderCards = document.querySelectorAll('.order-card');
+
+        if (applyFiltersButton) {
+            applyFiltersButton.addEventListener('click', function () {
+                const searchText = searchInput.value.toLowerCase();
+                const selectedStatus = statusFilter.value;
+                const selectedDate = dateFilter.value;
+
+                orderCards.forEach(card => {
+                    const orderId = card.querySelector('h3').textContent.toLowerCase();
+                    const statusText = card.querySelector('.status-display').textContent.trim();
+                    const orderDate = card.querySelector('p').textContent;
+
+                    let showCard = true;
+
+                    // Search filter
+                    if (searchText && !orderId.includes(searchText)) {
+                        showCard = false;
+                    }
+
+                    // Status filter
+                    if (selectedStatus && statusText !== selectedStatus) {
+                        showCard = false;
+                    }
+
+                    // Date filter
+                    if (selectedDate) {
+                        const orderDateTime = new Date(orderDate.replace('Placed on ', ''));
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        
+                        const weekStart = new Date(today);
+                        weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+                        
+                        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+
+                        if (selectedDate === 'today' && orderDateTime < today) {
+                            showCard = false;
+                        } else if (selectedDate === 'yesterday' && (orderDateTime < yesterday || orderDateTime >= today)) {
+                            showCard = false;
+                        } else if (selectedDate === 'this-week' && orderDateTime < weekStart) {
+                            showCard = false;
+                        } else if (selectedDate === 'this-month' && orderDateTime < monthStart) {
+                            showCard = false;
+                        }
+                    }
+
+                    card.style.display = showCard ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Close modal functionality
+        const closeModalButton = document.getElementById('closeModal');
+        const orderModal = document.getElementById('orderModal');
+
+        if (closeModalButton && orderModal) {
+            closeModalButton.addEventListener('click', function () {
+                orderModal.style.display = 'none';
+            });
+        }
+    });
+</script>

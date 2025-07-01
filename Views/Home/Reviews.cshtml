@@ -1,0 +1,279 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Reviews";
+}
+
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Page Header -->
+    <section style="
+        padding: 3rem 5% 1rem;
+        text-align: center;
+        background-color: #fff8f8;">
+        <h1 style="
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;">
+            Customer Reviews
+        </h1>
+        <p style="
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #555;
+            font-size: 1.1rem;">
+            Read what our customers are saying about us or share your own experience
+        </p>
+    </section>
+
+    <!-- Success Message (if review was submitted) -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div style="
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #e6f7e6;
+            border-left: 4px solid #4caf50;
+            color: #2e7d32;
+            border-radius: 4px;">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <!-- Latest Delivered Order Section -->
+    @if (ViewBag.LatestOrder != null)
+    {
+        <section style="padding: 2rem 5%; background-color: #f9f9f9;">
+            <div style="max-width: 800px; margin: 0 auto; background-color: white; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h2 style="font-size: 1.5rem; color: #333; margin-bottom: 1.5rem; text-align: center;">Your Latest Order</h2>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <p><strong>Order Date:</strong> @ViewBag.LatestOrder.OrderDate.ToString("MMMM dd, yyyy")</p>
+                    <p><strong>Order ID:</strong> @ViewBag.LatestOrder.OrderId</p>
+                    <p><strong>Status:</strong> @ViewBag.LatestOrder.Status</p>
+                    <p><strong>Delivery Address:</strong> @ViewBag.LatestOrder.Address</p>
+                </div>
+
+                <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Order Items:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    @foreach (var item in ViewBag.OrderItems)
+                    {
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                            @item.Menu.Name - Rs. @item.Menu.Price
+                        </li>
+                    }
+                </ul>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <p><strong>Total Amount:</strong> Rs. @ViewBag.LatestOrder.Amount</p>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <section style="padding: 2rem 5%; background-color: #f9f9f9; text-align: center;">
+            <div style="max-width: 800px; margin: 0 auto; background-color: white; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <p>You don't have any delivered orders yet to review.</p>
+            </div>
+        </section>
+    }
+
+    <!-- Write a Review Section -->
+    @if (ViewBag.LatestOrder != null)
+    {
+        <section style="
+            padding: 3rem 5%;
+            background-color: white;">
+            <div style="
+                max-width: 800px;
+                margin: 0 auto;
+                background-color: #fff8f8;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h2 style="
+                    font-size: 1.8rem;
+                    color: #333;
+                    margin-bottom: 1.5rem;
+                    text-align: center;">
+                    Write a Review
+                </h2>
+
+                @using (Html.BeginForm("SubmitReview", "Home", FormMethod.Post, new { @class = "review-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="orderId" value="@ViewBag.LatestOrder.OrderId" />
+
+                    <!-- Rating -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="
+                            display: block;
+                            margin-bottom: 0.5rem;
+                            font-weight: 500;
+                            color: #333;">Rating</label>
+                        <div style="font-size: 2rem; color: #ddd;">
+                            <span class="star" data-value="1" style="cursor: pointer;">☆</span>
+                            <span class="star" data-value="2" style="cursor: pointer;">☆</span>
+                            <span class="star" data-value="3" style="cursor: pointer;">☆</span>
+                            <span class="star" data-value="4" style="cursor: pointer;">☆</span>
+                            <span class="star" data-value="5" style="cursor: pointer;">☆</span>
+                            <input type="hidden" id="Stars" name="Stars" value="0" required>
+                        </div>
+                    </div>
+
+                    <!-- Product Selection -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="ProductName" style="
+                            display: block;
+                            margin-bottom: 0.5rem;
+                            font-weight: 500;
+                            color: #333;">Product Reviewed</label>
+                        <select id="ProductName" name="ProductName" style="
+                            width: 100%;
+                            padding: 0.8rem;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 1rem;
+                            outline: none;
+                            transition: border-color 0.3s ease;
+                            background-color: white;" required>
+                            <option value="" disabled selected>Select a product</option>
+                            @foreach (var item in ViewBag.OrderItems)
+                            {
+                                <option value="@item.Menu.Name">@item.Menu.Name</option>
+                            }
+                            <option value="General Experience">General Experience</option>
+                        </select>
+                    </div>
+
+                    <!-- Review Title -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="ReviewTitle" style="
+                            display: block;
+                            margin-bottom: 0.5rem;
+                            font-weight: 500;
+                            color: #333;">Review Title</label>
+                        <input type="text" id="ReviewTitle" name="ReviewTitle" placeholder="Summarize your experience" style="
+                            width: 100%;
+                            padding: 0.8rem;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 1rem;
+                            outline: none;
+                            transition: border-color 0.3s ease;" required>
+                    </div>
+
+                    <!-- Review Content -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="ReviewStatement" style="
+                            display: block;
+                            margin-bottom: 0.5rem;
+                            font-weight: 500;
+                            color: #333;">Your Review</label>
+                        <textarea id="ReviewStatement" name="ReviewStatement" rows="5" placeholder="Tell us about your experience" style="
+                            width: 100%;
+                            padding: 0.8rem;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            font-size: 1rem;
+                            outline: none;
+                            transition: border-color 0.3s ease;
+                            resize: vertical;" required></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" style="
+                        width: 100%;
+                        background-color: #ff6b6b;
+                        color: white;
+                        border: none;
+                        padding: 0.8rem;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        cursor: pointer;">
+                        Submit Review
+                    </button>
+                }
+            </div>
+        </section>
+    }
+
+    <!-- Footer -->
+    <footer style="
+        background-color: #333;
+        color: #fff;
+        padding: 3rem 5%;
+        margin-top: 3rem;">
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;">
+            <div style="max-width: 300px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6b6b;">CreamyUtopia</h3>
+                <p>Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Menu", "Menu", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("About", "About", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Contact", "Contact", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("My Orders", "MyOrder", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Reviews", "Review", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contact Us</h4>
+                <p>Shop #5, Jinnah Super Market</p>
+                <p>F-7 Markaz, Islamabad</p>
+                <p>Phone: (051) 456-7890</p>
+                <p>Email: info@creamyutopia.com</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Opening Hours</h4>
+                <p>Monday - Sunday: 12pm - 11pm (F-7)</p>
+                <p>Monday - Sunday: 10am - 10pm (Centaurus)</p>
+                <p>Monday - Sunday: 2pm - 12am (Bahria)</p>
+            </div>
+        </div>
+        <div style="
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;">
+            <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+@section Scripts {
+    <script>
+        // Star rating functionality
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function () {
+                const value = this.getAttribute('data-value');
+                document.getElementById('Stars').value = value;
+
+                // Update star display
+                document.querySelectorAll('.star').forEach((s, index) => {
+                    if (index < value) {
+                        s.textContent = '★';
+                        s.style.color = '#ff6b6b';
+                    } else {
+                        s.textContent = '☆';
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+    </script>
+}

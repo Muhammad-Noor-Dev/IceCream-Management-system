@@ -1,0 +1,369 @@
+﻿@model IEnumerable<SemesterProject.Models.Entities.Menu>
+
+@{
+    ViewBag.Title = "CreamyUtopia - Inventory Management";
+}
+
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    min-height: 100vh;
+    display: flex;">
+
+    <!-- Admin Sidebar -->
+    <div style="
+        width: 250px;
+        background-color: #333;
+        color: white;
+        padding: 2rem 0;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;">
+
+        <!-- Admin Logo -->
+        <div style="
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;">
+            CreamyUtopia<br>
+            <span style="font-size: 1rem; color: #ddd;">Admin Panel</span>
+        </div>
+
+        <!-- Admin Navigation -->
+        <ul style="
+            list-style: none;
+            padding: 0;
+            margin: 0;">
+
+
+
+            <li style="margin-bottom: 0.5rem;">
+                <a href="@Url.Action("Inventory", "Admin")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ddd;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Inventory Management
+                </a>
+            </li>
+
+            <li style="margin-bottom: 0.5rem;">
+                <a href="@Url.Action("Orders", "Admin")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ddd;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    Order Management
+                </a>
+            </li>
+
+          
+
+            <li style="margin-top: 2rem;">
+                <a href="@Url.Action("Index", "Home")" style="
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: #ff6b6b;
+                    text-decoration: none;
+                    transition: color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; vertical-align: text-bottom;">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Back to Website
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- Admin Sidebar (same as before) -->
+    <!-- ... keep the same sidebar code ... -->
+    <!-- Main Content -->
+    <div style="
+        flex: 1;
+        margin-left: 250px;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        min-height: 100vh;">
+
+        <!-- Page Header -->
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;">
+            <h1 style="
+                font-size: 2rem;
+                color: #333;
+                margin: 0;">
+                Inventory Management
+            </h1>
+
+            <div style="
+                display: flex;
+                align-items: center;">
+                <a href="@Url.Action("Add", "Admin")" style="
+                    display: inline-block;
+                    padding: 0.5rem 1rem;
+                    background-color: #ff6b6b;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    border: none;
+                    cursor: pointer;
+                    margin-left: 1rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 0.3rem;">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add New Product
+                </a>
+            </div>
+        </div>
+
+        <!-- Inventory Filters -->
+        <div style="
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;">
+
+            <div style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                align-items: center;">
+
+                <!-- Search -->
+                <div style="flex: 1; min-width: 200px;">
+                    <input type="text" id="searchInventory" placeholder="Search products..." style="
+                        width: 100%;
+                        padding: 0.7rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 0.9rem;">
+                </div>
+
+                <!-- Category Filter -->
+                <div style="min-width: 150px;">
+                    <select id="categoryFilter" style="
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        background-color: white;">
+                        <option value="">All Categories</option>
+                        <option value="Gelatos">Gelatos</option>
+                        <option value="Softie Ice Cream">Softie Ice Cream</option>
+                        <option value="Slush">Slush</option>
+                    </select>
+                </div>
+
+                <!-- Status Filter -->
+                <div style="min-width: 150px;">
+                    <select id="statusFilter" style="
+                        width: 100%;
+                        padding: 0.7rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+                        background-color: white;">
+                        <option value="">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <!-- Filter Button -->
+                <button id="applyFilters" style="
+                    padding: 0.7rem 1.5rem;
+                    background-color: #333;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    cursor: pointer;">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Inventory Table -->
+        <div style="
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;">
+
+            <div style="overflow-x: auto;">
+                <table id="inventoryTable" style="
+                    width: 100%;
+                    border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">image</th>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">Product</th>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">Category</th>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">Price</th>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">Status</th>
+                            <th style="
+                                text-align: left;
+                                padding: 1rem;
+                                border-bottom: 1px solid #eee;
+                                color: #666;
+                                font-weight: 500;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <img src="@Url.Action("GetImage", "Admin", new { id = item.Mid })"
+                                         alt="@item.Name"
+                                         style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;" />
+                                </td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    @item.Name
+                                </td>
+                                
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    @item.CategoryName
+                                </td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    Rs. @item.Price
+                                </td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <span style="
+                display: inline-block;
+                padding: 0.3rem 0.8rem;
+                background-color: @(item.Status == "Active" ? "#e8f5e9" : "#ffebee");
+                color: @(item.Status == "Active" ? "#4caf50" : "#f44336");
+                border-radius: 20px;
+                font-size: 0.8rem;">
+                                        @item.Status
+                                    </span>
+                                </td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Mid" class="btn btn-info text-white" style="
+                    background-color: #2196f3;
+                    color: white;
+                    border: none;
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 0.8rem;
+                    text-decoration: none;">Edit</a>
+
+                                        <form asp-action="Delete" asp-route-id="@item.Mid" method="post"
+                                              onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                            <button type="submit" class="btn btn-danger" >Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInventory = document.getElementById('searchInventory');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const statusFilter = document.getElementById('statusFilter');
+            const applyFilters = document.getElementById('applyFilters');
+            const inventoryTable = document.getElementById('inventoryTable');
+            const rows = inventoryTable.querySelectorAll('tbody tr');
+
+            function filterInventory() {
+                const searchTerm = searchInventory.value.toLowerCase();
+                const category = categoryFilter.value.toLowerCase();
+                const status = statusFilter.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const name = row.cells[1].textContent.toLowerCase(); // Product name (cell 1)
+                    const rowCategory = row.cells[2].textContent.toLowerCase(); // Category (cell 2)
+                    const rowStatusElement = row.cells[4].querySelector('span');
+                    const rowStatus = rowStatusElement ? rowStatusElement.textContent.toLowerCase() : '';
+
+                    // Debugging logs (you can remove these after testing)
+                    console.log('Name:', name, 'Search:', searchTerm);
+                    console.log('Category:', rowCategory, 'Filter:', category);
+                    console.log('Status:', rowStatus, 'Filter:', status);
+
+                    const matchesSearch = name.includes(searchTerm) || searchTerm === '';
+                    const matchesCategory = rowCategory.includes(category) || category === '';
+                    const matchesStatus = rowStatus.includes(status) || status === '';
+
+                    if (matchesSearch && matchesCategory && matchesStatus) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            // Event listeners
+            searchInventory.addEventListener('input', filterInventory);
+            applyFilters.addEventListener('click', filterInventory);
+            categoryFilter.addEventListener('change', filterInventory);
+            statusFilter.addEventListener('change', filterInventory);
+
+            // Initialize the filter on page load
+            filterInventory();
+        });
+    </script>
+}

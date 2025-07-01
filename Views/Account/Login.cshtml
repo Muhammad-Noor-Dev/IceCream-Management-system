@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Login";
+}
+@model SemesterProject.Models.checklogin
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Login Section -->
+    <section style="
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 5%;
+        background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/images/about.jpg') center/cover no-repeat fixed;">
+
+        <div style="
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 auto;">
+
+            <!-- Left Side - Image -->
+            <div id="login-image" style="
+                flex: 1;
+                background: url('/images/login.jfif') center/cover no-repeat;
+                display: none;">
+                <!-- This will be shown on larger screens via JavaScript -->
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div style="
+                flex: 1;
+                padding: 3rem 2rem;
+                display: flex;
+                flex-direction: column;
+                margin: 0 auto;
+                max-width: 450px;
+                width: 100%;">
+
+                <h1 style="
+                    font-size: 2.5rem;
+                    color: #333;
+                    margin-bottom: 0.5rem;
+                    text-align: center;">
+                    Welcome Back
+                </h1>
+
+                <p style="
+                    color: #666;
+                    margin-bottom: 2rem;
+                    text-align: center;">
+                    Sign in to your CreamyUtopia account
+                </p>
+
+                <!-- Login Form -->
+                <form  method="post" class="login-form" style="width: 100%;">
+                    
+
+                    <!-- Email Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="email" style="
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;">Email Address</label>
+                        <input type="email" id="Email" asp-for="Email" name="Email" placeholder="Enter your email" style="
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div style="margin-bottom: 1rem;">
+                        <label for="password" style="
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;">Password</label>
+                        <input type="password" id="Password" asp-for="Password" name="Password" placeholder="Enter your password" style="
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;" required>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;">
+
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" id="remember" name="remember" style="margin-right: 0.5rem;">
+                            <label for="remember" style="color: #666; font-size: 0.9rem;">Remember me</label>
+                        </div>
+
+                        <a href="@Url.Action("ForgotPassword", "Account")" style="
+            color: #ff6b6b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;">Forgot Password?</a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" style="
+        width: 100%;
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 1.5rem;">
+                        Login
+                    </button>
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["ErrorMessage"]
+                           
+                        </div>
+                    }
+
+                    <!-- Divider -->
+                    <div style="
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;">
+                        <div style="flex: 1; height: 1px; background-color: #ddd;"></div>
+                        <div style="flex: 1; height: 1px; background-color: #ddd;"></div>
+                    </div>
+
+                    <!-- Sign Up Link -->
+                    <p style="text-align: center; color: #666; margin: 0;">
+                        Don't have an account?
+                        @Html.ActionLink("Sign Up", "Register", "Account", null, new { style = "color: #ff6b6b; text-decoration: none; font-weight: 500;" })
+                    </p>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Simplified for login page) -->
+    <footer style="
+        background-color: #333;
+        color: #fff;
+        padding: 1.5rem 5%;
+        text-align: center;">
+        <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Responsive Design -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var imageDiv = document.getElementById('login-image');
+
+            function handleResize() {
+                if (window.innerWidth >= 768 && imageDiv) {
+                    imageDiv.style.display = 'block';
+                } else if (imageDiv) {
+                    imageDiv.style.display = 'none';
+                }
+            }
+
+            // Initial check
+            handleResize();
+
+            // Add event listener for window resize
+            window.addEventListener('resize', handleResize);
+        });
+    </script>
+</div>
+

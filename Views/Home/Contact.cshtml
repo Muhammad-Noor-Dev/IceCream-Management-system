@@ -1,0 +1,584 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Contact Us";
+}
+@model SemesterProject.Models.addcontact
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Hero Section -->
+    <section style="
+        height: 40vh;
+        background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+         background-image:url('/images/icee.jpg') ;
+         background-position:center;
+         background-repeat:no-repeat;
+         background-size:cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 5%;">
+        <h1 style="
+            font-size: 3.5rem;
+            font-weight:bolder;
+            margin-bottom: 1rem;
+            color: #ff6b6b;">
+            Contact Us
+        </h1>
+        <p style="
+            font-size: 1.3rem;
+            font-weight:600;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            line-height: 1.6;">
+            We'd love to hear from you! Get in touch with our team.
+        </p>
+    </section>
+
+    <!-- Contact Information and Form Section -->
+    <section style="
+        padding: 5rem 5%;">
+        <div style="
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;">
+
+            <!-- Contact Information -->
+            <div>
+                <h2 style="
+                    font-size: 2.2rem;
+                    color: #333;
+                    margin-bottom: 2rem;">
+                    Get In Touch
+                </h2>
+
+                <!-- Quick Contact Methods -->
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    margin-bottom: 2.5rem;">
+
+                    <!-- Phone -->
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;">
+                        <div style="
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            background-color: #fff8f8;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.3rem; color: #ff6b6b;">Phone</h3>
+                            <p style="color: #555;">(051) 456-7890</p>
+                            <p style="color: #555;">(051) 123-4567 (Customer Service)</p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;">
+                        <div style="
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            background-color: #fff8f8;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.3rem; color: #ff6b6b;">Email</h3>
+                            <p style="color: #555;">info@creamyutopia.com</p>
+                            <p style="color: #555;">support@creamyutopia.com</p>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;">
+                        <div style="
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            background-color: #fff8f8;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.3rem; color: #ff6b6b;">WhatsApp</h3>
+                            <p style="color: #555;">+92 300 1234567</p>
+                            <p style="color: #555;">Available 10am - 8pm daily</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div>
+                    <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 1rem;">Follow Us</h3>
+                    <div style="
+                        display: flex;
+                        gap: 1rem;">
+                        <!-- Facebook -->
+                        <a href="#" style="
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            background-color: #ff6b6b;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: white;
+                            text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="#" style="
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            background-color: #ff6b6b;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: white;
+                            text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+
+                        <!-- Twitter -->
+                        <a href="#" style="
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            background-color: #ff6b6b;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: white;
+                            text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div style="
+                background-color: #fff8f8;
+                padding: 2rem;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h2 style="
+                    font-size: 2rem;
+                    color: #333;
+                    margin-bottom: 1.5rem;">
+                    Send Us a Message
+                </h2>
+
+                <form asp-action="Contact" asp-controller="Home" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Name Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label asp-for="Name" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Your Name</label>
+                        <input asp-for="Name" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;" required>
+                        <span asp-validation-for="Name" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label asp-for="Email" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Your Email</label>
+                        <input asp-for="Email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;" required>
+                        <span asp-validation-for="Email" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Phone Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label asp-for="Number" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Phone Number</label>
+                        <input asp-for="Number" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                        <span asp-validation-for="Number" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Subject Dropdown -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label asp-for="Topic" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Subject</label>
+                        <select asp-for="Topic" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; background-color: white;" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Order Issue">Order Issue</option>
+                            <option value="Catering Request">Catering Request</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Topic" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Message Textarea -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label asp-for="Message" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Your Message</label>
+                        <textarea asp-for="Message" rows="5" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; resize: vertical;" required></textarea>
+                        <span asp-validation-for="Message" style="color: #ff6b6b;"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" style="background-color: #ff6b6b; color: white; border: none; padding: 0.8rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer;">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section style="
+        padding: 5rem 5%;
+        background-color: #fff8f8;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                color: #333;
+                text-align: center;
+                margin-bottom: 3rem;">
+                Visit Us in Islamabad
+            </h2>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;">
+
+                <!-- Location 1 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="
+                        height: 200px;
+                        background-image:url('/images/f-7.jpeg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">F-7 Markaz</h3>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            Shop #5, Jinnah Super Market<br>
+                            F-7 Markaz, Islamabad
+                        </p>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            <strong>Phone:</strong> (051) 456-7890
+                        </p>
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Hours:</strong><br>
+                            Monday - Sunday: 12pm - 11pm
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" style="
+                            display: inline-block;
+                            margin-top: 1rem;
+                            color: #ff6b6b;
+                            text-decoration: none;
+                            font-weight: 500;">Get Directions →</a>
+                    </div>
+                </div>
+
+                <!-- Location 2 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="
+                        height: 200px;
+                       background-image:url('/images/The_Centarus.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Centaurus Mall</h3>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            Food Court, 4th Floor<br>
+                            The Centaurus Mall, Islamabad
+                        </p>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            <strong>Phone:</strong> (051) 123-4567
+                        </p>
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Hours:</strong><br>
+                            Monday - Sunday: 10am - 10pm
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" style="
+                            display: inline-block;
+                            margin-top: 1rem;
+                            color: #ff6b6b;
+                            text-decoration: none;
+                            font-weight: 500;">Get Directions →</a>
+                    </div>
+                </div>
+
+                <!-- Location 3 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="
+                        height: 200px;
+                        background-image:url('/images/bahria.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;"></div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #ff6b6b;">Bahria Town Phase 4</h3>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            Shop #12, Commercial Area<br>
+                            Bahria Town Phase 4, Islamabad
+                        </p>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 1rem;">
+                            <strong>Phone:</strong> (051) 789-0123
+                        </p>
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Hours:</strong><br>
+                            Monday - Sunday: 2pm - 12am
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" style="
+                            display: inline-block;
+                            margin-top: 1rem;
+                            color: #ff6b6b;
+                            text-decoration: none;
+                            font-weight: 500;">Get Directions →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section style="padding: 0 5% 5rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                color: #333;
+                text-align: center;
+                margin-bottom: 2rem;">
+                Find Us on the Map
+            </h2>
+
+            <!-- Embedded Map (placeholder) -->
+            <div style="
+                width: 100%;
+                height: 400px;
+                background-color: #f5f5f5;
+                background-image:url('/images/google_maps.jpg') ;
+                         background-position:center;
+                         background-repeat:no-repeat;
+                         background-size:cover;
+                border-radius: 15px;
+                overflow: hidden;
+                position: relative;">
+                <!-- This would be replaced with an actual Google Maps embed in a real implementation -->
+                <div style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;">
+                    <p style="color: #777; margin-bottom: 1rem;">Map of our locations in Islamabad</p>
+                    <a href="https://maps.app.goo.gl/kxVMFBwi5cm34V5p8" target="_blank" style="
+                        display: inline-block;
+                        background-color: #ff6b6b;
+                        color: white;
+                        padding: 0.8rem 1.5rem;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-weight: 500;">Open in Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="
+        padding: 5rem 5%;
+        background-color: #fff8f8;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.5rem;
+                color: #333;
+                text-align: center;
+                margin-bottom: 3rem;">
+                Frequently Asked Questions
+            </h2>
+
+            <div style="
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;">
+
+                <!-- FAQ Item 1 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 1.5rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #ff6b6b;">Do you offer catering services?</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        Yes, we offer catering services for events of all sizes. Please contact us at least 48 hours in advance
+                        to discuss your requirements and place an order.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 1.5rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #ff6b6b;">Do you deliver?</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        Yes, we offer delivery within Islamabad. Delivery is free for orders over Rs. 1500. For smaller orders,
+                        a delivery fee applies based on your location.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 1.5rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #ff6b6b;">Do you have dairy-free options?</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        Yes, we offer a selection of dairy-free sorbets and slushes. Please ask our staff about allergen information
+                        when placing your order.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div style="
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 1.5rem;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #ff6b6b;">How can I place a bulk order?</h3>
+                    <p style="color: #555; line-height: 1.6;">
+                        For bulk orders, please call our customer service line at (051) 123-4567 or email us at
+                        orders@creamyutopia.com with your requirements at least 24 hours in advance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section style="
+        padding: 4rem 5%;
+        text-align: center;">
+        <h2 style="
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;">
+            Ready to Satisfy Your Sweet Tooth?
+        </h2>
+        <p style="
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #555;
+            font-size: 1.1rem;">
+            Visit one of our locations today or place an order online. We can't wait to serve you!
+        </p>
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;">
+            @Html.ActionLink("View Our Menu", "Menu", "Home", null, new { style = "text-decoration: none; color: #fff; padding: 0.8rem 2rem; border-radius: 30px; background-color: #ff6b6b; font-weight: bold; font-size: 1.1rem;" })
+            <a href="tel:+0514567890" style="text-decoration: none; color: #ff6b6b; padding: 0.8rem 2rem; border-radius: 30px; border: 2px solid #ff6b6b; font-weight:  color: #ff6b6b; padding: 0.8rem 2rem; border-radius: 30px; border: 2px solid #ff6b6b; font-weight: bold; font-size: 1.1rem;">Call Us Now</a>
+        </div>
+    </section>
+
+    <!-- Footer (Same as other pages for consistency) -->
+    <footer style="
+        background-color: #333;
+        color: #fff;
+        padding: 3rem 5%;">
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;">
+            <div style="max-width: 300px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6b6b;">CreamyUtopia</h3>
+                <p>Indulge in our handcrafted ice creams and coffees, made with love and the finest ingredients.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Home", "Index", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Menu", "Menu", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("About", "About", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                    <li style="margin-bottom: 0.5rem;">@Html.ActionLink("Contact", "Contact", "Home", null, new { style = "color: #fff; text-decoration: none;" })</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contact Us</h4>
+                <p>Shop #5, Jinnah Super Market</p>
+                <p>F-7 Markaz, Islamabad</p>
+                <p>Phone: (051) 456-7890</p>
+                <p>Email: info@creamyutopia.com</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Opening Hours</h4>
+                <p>Monday - Sunday: 12pm - 11pm (F-7)</p>
+                <p>Monday - Sunday: 10am - 10pm (Centaurus)</p>
+                <p>Monday - Sunday: 2pm - 12am (Bahria)</p>
+            </div>
+        </div>
+        <div style="
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;">
+            <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+

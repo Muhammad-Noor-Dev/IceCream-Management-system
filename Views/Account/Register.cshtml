@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "CreamyUtopia - Sign Up";
+}
+@model SemesterProject.Models.addusers
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;">
+
+    @await Html.PartialAsync("_Navigation")
+
+    <!-- Sign Up Section -->
+    <section style="
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 5%;
+        background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/images/about.jpg') center/cover no-repeat fixed;">
+
+        <div style="
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 auto;">
+
+            <!-- Left Side - Sign Up Form -->
+            <div style="
+                flex: 1;
+                padding: 3rem 2rem;
+                display: flex;
+                flex-direction: column;
+                margin: 0 auto;
+                max-width: 450px;
+                width: 100%;">
+
+                <h1 style="
+                    font-size: 2.5rem;
+                    color: #333;
+                    margin-bottom: 0.5rem;
+                    text-align: center;">
+                    Create Account
+                </h1>
+
+                <p style="
+                    color: #666;
+                    margin-bottom: 2rem;
+                    text-align: center;">
+                    Join CreamyUtopia for exclusive offers and rewards
+                </p>
+                <form method="post" class="register-form" style="width: 100%;">
+                    
+                    <!-- Name Fields -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <!-- First Name -->
+                        <div style="flex: 1;">
+                            <label for="FirstName" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">First Name</label>
+                            <input type="text" id="FirstName" asp-for="FirstName" name="FirstName" placeholder="Enter first name" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div style="flex: 1;">
+                            <label for="LastName" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Last Name</label>
+                            <input type="text" id="LastName" asp-for="LastName" name="LastName" placeholder="Enter last name" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                        </div>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="Email" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Email Address</label>
+                        <input type="email" id="Email" asp-for="Email" name="Email" placeholder="Enter your email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                    </div>
+
+                    <!-- Phone Input -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="PhoneNumber" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Phone Number</label>
+                        <input type="tel" id="PhoneNumber" asp-for="PhoneNumber" name="PhoneNumber" placeholder="Enter your phone number" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                    </div>
+
+                    <!-- Password Fields -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <!-- Password -->
+                        <div style="flex: 1;">
+                            <label for="Password" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Password</label>
+                            <input type="password" id="Password" asp-for="Password" name="Password" placeholder="Create password" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div style="flex: 1;">
+                            <label for="confirmPassword" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #333;">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s ease;" required>
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- Terms and Conditions -->
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 2rem;">
+                        <input type="checkbox" id="terms" name="terms" style="margin-right: 0.5rem; margin-top: 0.3rem;" required>
+                        <label for="terms" style="color: #666; font-size: 0.9rem; line-height: 1.4;">
+                            I agree to the
+                            <a href="#" style="color: #ff6b6b; text-decoration: none; font-weight: 500;">Terms of Service</a>
+                            and
+                            <a href="#" style="color: #ff6b6b; text-decoration: none; font-weight: 500;">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <!-- Sign Up Button -->
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 2rem;">
+                    <input type="submit" style="width: 100%; background-color: #ff6b6b; color: white; border: none; padding: 0.8rem; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease; margin-bottom: 1.5rem;" value="Create Account"/>    
+                   </div>
+
+                    <!-- Divider -->
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="flex: 1; height: 1px; background-color: #ddd;"></div>
+                        <div style="flex: 1; height: 1px; background-color: #ddd;"></div>
+                    </div>
+
+                    <!-- Login Link -->
+                    <p style="text-align: center; color: #666; margin: 0;">
+                        Already have an account?
+                        @Html.ActionLink("Sign In", "Login", "Account", null, new { style = "color: #ff6b6b; text-decoration: none; font-weight: 500;" })
+                    </p>
+                </form>
+
+            </div>
+
+            <!-- Right Side - Image -->
+            <div id="signup-image" style="
+                flex: 1;
+                background: url('/images/signup.jfif') center/cover no-repeat;
+                display: none;">
+                <!-- This will be shown on larger screens via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Simplified for signup page) -->
+    <footer style="
+        background-color: #333;
+        color: #fff;
+        padding: 1.5rem 5%;
+        text-align: center;">
+        <p>&copy; @DateTime.Now.Year CreamyUtopia. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Responsive Design -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var imageDiv = document.getElementById('signup-image');
+
+            function handleResize() {
+                if (window.innerWidth >= 768 && imageDiv) {
+                    imageDiv.style.display = 'block';
+                } else if (imageDiv) {
+                    imageDiv.style.display = 'none';
+                }
+            }
+
+            // Initial check
+            handleResize();
+
+            // Add event listener for window resize
+            window.addEventListener('resize', handleResize);
+        });
+    </script>
+</div>
+

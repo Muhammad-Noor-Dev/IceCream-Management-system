@@ -1,0 +1,172 @@
+﻿@model SemesterProject.Models.Entities.AddMenu
+
+@{
+    ViewBag.Title = "CreamyUtopia - Add New Menu Item";
+}
+
+<div style="
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    min-height: 100vh;
+    display: flex;">
+
+    <!-- Admin Sidebar (same as before) -->
+    <!-- ... keep the same sidebar code ... -->
+    <!-- Main Content -->
+    <div style="
+        flex: 1;
+        margin-left: 250px;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        min-height: 100vh;">
+
+        <!-- Page Header -->
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2rem; color: #333; margin: 0;">
+                Add New Menu Item
+            </h1>
+        </div>
+
+        <!-- Add Product Form -->
+        <div style="
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+
+            <form asp-action="Add" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger" style="color: #f44336; margin-bottom: 1.5rem;"></div>
+
+                <!-- Product Name -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label asp-for="Name" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <input asp-for="Name" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;" />
+                    <span asp-validation-for="Name" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Description -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label asp-for="Description" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <textarea asp-for="Description" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        min-height: 100px;"></textarea>
+                    <span asp-validation-for="Description" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Price -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label asp-for="Price" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <input asp-for="Price" type="number" min="0" step="10" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;" />
+                    <span asp-validation-for="Price" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Category -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label asp-for="CategoryName" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <select asp-for="CategoryName" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        background-color: white;">
+                        <option value="">Select Category</option>
+                        <option value="Gelatos">Gelatos</option>
+                        <option value="Softie Ice Cream">Softie Ice Cream</option>
+                        <option value="Slush">Slush</option>
+                    </select>
+                    <span asp-validation-for="CategoryName" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Image -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label asp-for="ImageFile" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <input asp-for="ImageFile" type="file" accept="image/*" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;" />
+                    <span asp-validation-for="ImageFile" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Status -->
+                <div style="margin-bottom: 2rem;">
+                    <label asp-for="Status" style="
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                        color: #333;"></label>
+                    <select asp-for="Status" style="
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        background-color: white;">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                    <span asp-validation-for="Status" style="color: #f44336; font-size: 0.8rem;"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" style="
+                    width: 100%;
+                    background-color: #ff6b6b;
+                    color: white;
+                    border: none;
+                    padding: 0.8rem;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    cursor: pointer;">
+                    Add Menu Item
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
