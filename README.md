@@ -2,13 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🍦 Ice Cream Shop Website README</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-    h1, h2, h3 { color: #333; }
-    pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
-    code { color: #c7254e; background: #f9f2f4; padding: 2px 4px; border-radius: 4px; }
-  </style>
+  
 </head>
 <body>
   <h1>🍦 Ice Cream Shop Website</h1>
